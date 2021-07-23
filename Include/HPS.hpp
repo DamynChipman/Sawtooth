@@ -4,6 +4,10 @@
 #include <petsc.h>
 #include <p4est.h>
 
+#include <HPS_Poisson.hpp>
+// #include <HPS_CellGrid.hpp>
+// #include <HPS_Patch.hpp>
+
 namespace HPS {
 
 int HPS_Init(int* aargc, char*** aargv, char help[]);

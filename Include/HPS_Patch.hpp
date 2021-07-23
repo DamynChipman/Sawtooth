@@ -18,14 +18,15 @@ public:
 	typedef struct patch_data {
 
 		CellGrid::cellgrid_data_t* cellgrid;
-		Vec f_vector;
-		Vec g_vector;
-		Vec h_vector;
-		Mat X_matrix;
-		Mat H_matrix;
-		Mat S_matrix;
-		Mat T_matrix;
-		DM  petsc_da;
+		Vec f_vector;    // RHS Load Vector
+		Vec g_vector;    // Dirichlet BC Vector
+		Vec h_vector;    // Neumann BC Vector
+		Mat A_matrix;    // Finite Difference Stencil Matrix
+		Mat X_matrix;    // Interior Potential Matrix
+		Mat H_matrix;    // Interior Flux Matrix
+		Mat S_matrix;    // Solution Matrix
+		Mat T_matrix;    // Dirichlet-to-Neumann Matrix
+		DM  petsc_da;    // Distributed Array
 
 	} patch_data_t;
 	patch_data_t data_;
@@ -42,6 +43,7 @@ public:
 	Vec* getFVector();
 	Vec* getGVector();
 	Vec* getHVector();
+	Mat* getAMatrix();
 	Mat* getXMatrix();
 	Mat* getHMatrix();
 	Mat* getSMatrix();
@@ -53,6 +55,8 @@ public:
 	int getID();
 	int getLevel();
 	
+	void buildAMatrix();
+	void buildSMatrix();
 	void buildTMatrix();
 
 };
